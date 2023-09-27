@@ -5,12 +5,12 @@ import re
 
 API_TOKEN = "APIのKEY"
 
-# 地名辞書の作成
+# 地名辞書
 地名辞書 = {
     "東京": "tokyo",
     "大阪": "osaka",
     "名古屋": "nagoya",
-    # 今回は3つだけ
+    # 今回は3つだけ作成する
 }
 
 def extract_location(input_text, location_dict):
@@ -20,7 +20,7 @@ def extract_location(input_text, location_dict):
             extracted_locations.append(location)
     return extracted_locations
 
-input_text = "地名（辞書内のもの）"
+input_text = "辞書内の地名）"
 extracted_locations = extract_location(input_text, 地名辞書)
 
 if extracted_locations:
@@ -30,7 +30,7 @@ if extracted_locations:
     response = requests.get(
         "https://api.openweathermap.org/data/2.5/weather",
         params={
-            "q": selected_location,  # 地名に置き換え
+            "q": selected_location,  
             "appid": API_TOKEN,
             "units": "metric",
             "lang": "ja",
@@ -40,4 +40,4 @@ if extracted_locations:
     ret = json.loads(response.text)
     pprint.pprint(ret)
 else:
-    print("地名が見つかりませんでした。")
+    print("入力された地名が見つかりませんでした。")
